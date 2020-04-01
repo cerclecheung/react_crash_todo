@@ -49,8 +49,8 @@ Empty array of dependencies. Runs only once.
     import React, { useEffect } from 'react';
 
     useEffect(() => {
-    fetchData();
-  }, []);
+        fetchData();
+    }, []);
 ```
 
 
@@ -60,6 +60,7 @@ Return inside of the useEffect mimics componentWillUnmount()
   import React, { useEffect } from 'react';
 
   useEffect(()=>{
+      
       /* ... */
 
       return () => {

@@ -1,81 +1,26 @@
-import React, { Component } from "react";
+import React from "react";
 // import { BrowserRouter as Router, Route } from "react-router-dom";
 import Header from "./components/layout/Header";
 import Todos from "./components/Todos";
 import AddTodo from "./components/AddTodo";
+import { TodoProvider } from "./context/todos_context";
+
 // import About from './components/pages/About';
-import uuid from "uuid";
-import axios from "axios";
 
 import "./App.css";
 
-class App extends Component {
-  state = {
-    todos: []
-  };
-
-  componentDidMount() {
-    axios
-      .get("https://jsonplaceholder.typicode.com/todos?_limit=10")
-      .then(res => this.setState({ todos: res.data }));
-  }
-
-
-  // Toggle Complete
-  markComplete = id => {
-    this.setState({
-      todos: this.state.todos.map(todo => {
-        if (todo.id === id) {
-          todo.completed = !todo.completed;
-        }
-        return todo;
-      })
-    });
-  };
-
-  // Delete Todo
-  delTodo = id => {
-    // axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`).then(res =>
-      this.setState({
-        todos: [...this.state.todos.filter(todo => todo.id !== id)]
-      })
-    // );
-  };
-
-  // Add Todo
-  addTodo = title => {
-    // axios
-    //   .post("https://jsonplaceholder.typicode.com/todos", {
-    //     title,
-    //     completed: false
-    //   })
-      // .then(res => {
-        let todo = {
-          title,
-          completed: false,
-          id : uuid.v4()
-        }
-        ;
-        this.setState({ todos: [...this.state.todos, todo] });
-      // });
-  };
-
-  render() {
-    return (
+function App() {
+  return (
+    <TodoProvider>
       <div className="App">
         <div className="container">
-          <Header />
-
-          <AddTodo addTodo={this.addTodo} />
-          <Todos
-            todos={this.state.todos}
-            markComplete={this.markComplete}
-            delTodo={this.delTodo}
-          />
+          <Header/>
+          <AddTodo/>
+          <Todos/>
         </div>
       </div>
-    );
-  }
+    </TodoProvider>
+  );
 }
 
 export default App;
