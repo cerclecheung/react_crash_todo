@@ -18,9 +18,10 @@ npm run build
 Convert all class components to functional components make use of useState and/or useEffect when necessary.
 
 
-useState Examples
+## useState Examples
 
-```import React, { useState } from 'react';
+```
+import React, { useState } from 'react';
 
 const Message= () => {
    const messageState = useState( '' );
@@ -30,25 +31,34 @@ const Message= () => {
 }
 ```
 
-useEffect Examples
+## useEffect Examples
 
 No array of dependencies. Runs after every re-render
 
-```useEffect(() => {
+```
+import React, { useEffect } from 'react';
+
+useEffect(() => {
     document.title = `Runs after every re-rendering.`;
   });
-  ```
+```
 
 Empty array of dependencies. Runs only once.
 
-```useEffect(() => {
+```
+import React, { useEffect } from 'react';
+
+useEffect(() => {
     fetchData();
   }, []);
 
 
 Return inside of the useEffect mimics componentWillUnmount()
 
-  ```useEffect(()=>{
+  ```
+  import React, { useEffect } from 'react';
+
+  useEffect(()=>{
       /* ... */
 
       return () => {
@@ -56,4 +66,5 @@ Return inside of the useEffect mimics componentWillUnmount()
       }
 
   },[])
+  ```
 
